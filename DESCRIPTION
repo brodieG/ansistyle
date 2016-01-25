@@ -1,0 +1,22 @@
+Package: ansistyle
+Title: Style Console Output With Ansi Escape Sequences
+Version: 0.0.1
+Authors@R: c(
+    person(
+    "Brodie", "Gaslam", email="brodie.gaslam@yahoo.com",
+    role=c("aut", "cre")),
+    person(
+    "Gabor", "Csardi", email="csardi.gabor@gmail.com",
+    role=c("cph"),
+    comment="Copied parts of sources of crayon package"))
+Description: Stripped down dependency-less version of the `crayon` package by
+    Gabor Csardi. Modifies character vectors by adding ANSI escape sequences to
+    render text with style in terminals that support ANSI style escape sequences.
+Depends:
+    R (>= 3.2.2)
+Suggests:
+    testthat,
+    covr
+License: GPL-3 + file LICENSE
+LazyData: true
+RoxygenNote: 5.0.1
