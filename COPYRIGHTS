@@ -1,0 +1,31 @@
+--------------------------------------------------------------------------------
+
+Most of the code in this package was taken and adapted from the `crayon` package by Gabor Csardi.  The original code prior to modifications was released under the following license:
+
+  License: MIT
+  YEAR: 2014-2015
+  COPYRIGHT HOLDER: Gabor Csardi
+
+The original code is available at https://github.com/gaborcsardi/crayon/commit/00229b14298a2091d7be5e0d2f81b7bdda7d6b03
+
+--------------------------------------------------------------------------------
+
+The code in this package is made available under the GPL-3 license:
+
+  License: GPL-3
+  YEAR: 2016
+  COPYRIGHT HOLDER: Brodie Gaslam
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
