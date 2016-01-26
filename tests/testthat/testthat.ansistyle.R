@@ -16,11 +16,9 @@ test_that("colors working", {
   expect_identical(strip_ansi(clrd), letters[1:3])
   expect_is(valid_ansi_styles(), "character")
   # For visual inspection
-  styles <- valid_ansi_styles()
-  cat(
-    paste(styles, ansi_style(rep("hello", length(styles)), styles), sep=": "),
-    sep="\n"
-  )
+
+  cat("\n")
+  ansi_style_palette()
 } )
 test_that("misc", {
   expect_warning(ansi_available("blahblah"), "assuming NULL")

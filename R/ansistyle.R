@@ -1,4 +1,4 @@
-#' Style Console Output With Ansi Escape Sequences
+#' Style Console Output With ANSI Escape Sequences
 #'
 #' Stripped down dependency-less version of the \code{crayon} package by
 #' Gabor Csardi. Modifies character vectors by adding ANSI escape sequences to
@@ -38,6 +38,12 @@ ansi_regex <- paste0("(?:(?:\\x{001b}\\[)|\\x{009b})",
 #' @return input, without ANSI escape sequences for \code{strip_ansi}, TRUE or
 #'   FALSE for \code{contains_ansi}
 #' @aliases contains_ansi
+#' @examples
+#' in.red <- ansi_style("hello\n", "red", use.style=TRUE)
+#' contains_ansi(in.red)
+#' cat(in.red)
+#' contains_ansi(strip_ansi(in.red))
+#' cat(strip_ansi(in.red)
 
 strip_ansi <- function(string) {
   gsub(ansi_regex, "", string, perl = TRUE)
@@ -110,10 +116,10 @@ ansi.codes <- list(
   bold = c(1, 22), # 21 isn't widely supported and 22 does the same thing
   blurred = c(2, 22),
   italic = c(3, 23),
-  underline = c(4, 24),
   inverse = c(7, 27),
+  underline = c(4, 24),
   hidden = c(8, 28),
-  strikethrough = c(9, 29),
+  strikethru = c(9, 29),
 
   black = c(30, 39),
   red = c(31, 39),
@@ -144,7 +150,10 @@ codes.mx <- do.call(rbind, ansi.codes)
 #' whereas this function should continue to behave as currently documented.
 #'
 #' @export
+#' @seealso \code{\link{ansi_style_palette}}
 #' @return character vector with allowable styles
+#' @examples
+#' valid_ansi_styles()
 
 valid_ansi_styles <- function() names(ansi.codes)
 
@@ -161,10 +170,16 @@ valid_ansi_styles <- function() names(ansi.codes)
 #' @param txt character vector to style; every element of the vector will have
 #'   escape sequences added at the beginning and end of the string
 #' @param style character, either length 1L or same length as \code{txt}, what
-#'   style to use, see \code{link{ansi_styles}}
+#'   style to use, see \code{\link{valid_ansi_styles}}
 #' @param use.style logical(1L) whether to use style or not; provides a
 #'   mechanism for turning off styling for systems that do not support it
 #' @return character vector, \code{txt} with ansi escape sequences added
+#' @seealso \code{\link{valid_ansi_styles}}, \code{\link{ansi_style_palette}}
+#' @examples
+#' cat(ansi_style("hello", "red"), "\n")
+#'
+#' ## some nesting possible if escape sequences allow it
+#' cat(ansi_style(c("baz", ansi_style("foo", "bgGreen"), "bar"), "blue"), "\n")
 
 ansi_style <- function(
   txt, style, use.style=ansi_available()

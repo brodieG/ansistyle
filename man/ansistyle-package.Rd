@@ -3,7 +3,7 @@
 \docType{package}
 \name{ansistyle-package}
 \alias{ansistyle-package}
-\title{Style Console Output With Ansi Escape Sequences}
+\title{Style Console Output With ANSI Escape Sequences}
 \description{
 Stripped down dependency-less version of the \code{crayon} package by
 Gabor Csardi. Modifies character vectors by adding ANSI escape sequences to

@@ -1,5 +1,5 @@
 Package: ansistyle
-Title: Style Console Output With Ansi Escape Sequences
+Title: Style Console Output with Ansi Escape Sequences
 Version: 0.0.1
 Authors@R: c(
     person(

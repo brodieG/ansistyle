@@ -19,4 +19,11 @@ input, without ANSI escape sequences for \code{strip_ansi}, TRUE or
 \description{
 Uses the \code{ansistyle:::ansi_regex} pattern.
 }
+\examples{
+in.red <- ansi_style("hello\\n", "red", use.style=TRUE)
+contains_ansi(in.red)
+cat(in.red)
+contains_ansi(strip_ansi(in.red))
+cat(strip_ansi(in.red)
+}
 

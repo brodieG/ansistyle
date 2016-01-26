@@ -11,7 +11,7 @@ ansi_style(txt, style, use.style = ansi_available())
 escape sequences added at the beginning and end of the string}
 
 \item{style}{character, either length 1L or same length as \code{txt}, what
-style to use, see \code{link{ansi_styles}}}
+style to use, see \code{\link{valid_ansi_styles}}}
 
 \item{use.style}{logical(1L) whether to use style or not; provides a
 mechanism for turning off styling for systems that do not support it}
@@ -26,5 +26,14 @@ Nesting is \bold{not} supported, except for those ANSI sequences that have
 different terminators (e.g. font colors vs. background colors). For a better
 and more complete implementation see the \code{crayon} package by Gabor
 Csardi.
+}
+\examples{
+cat(ansi_style("hello", "red"), "\\n")
+
+## some nesting possible if escape sequences allow it
+cat(ansi_style(c("baz", ansi_style("foo", "bgGreen"), "bar"), "blue"), "\\n")
+}
+\seealso{
+\code{\link{valid_ansi_styles}}, \code{\link{ansi_style_palette}}
 }
 

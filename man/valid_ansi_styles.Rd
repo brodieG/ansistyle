@@ -15,4 +15,10 @@ actual codes used try \code{ansistyle:::ansi.codes)}.  If you access the
 internal objects directly keep in mind that those may change in the future,
 whereas this function should continue to behave as currently documented.
 }
+\examples{
+valid_ansi_styles()
+}
+\seealso{
+\code{\link{ansi_style_palette}}
+}
 
