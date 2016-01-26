@@ -1,7 +1,7 @@
 # ansistyle - Stylish Terminal Output
 
 [![Build Status](https://travis-ci.org/brodieG/ansistyle.png?branch=master)](https://travis-ci.org/brodieG/ansistyle)
-[![Code Coverage](https://codecov.io/github/brodieG/unitizer/coverage.svg?branch=master)](https://codecov.io/github/brodieG/ansistyle?branch=master)
+[![Code Coverage](https://codecov.io/github/brodieG/ansistyle/coverage.svg?branch=master)](https://codecov.io/github/brodieG/ansistyle?branch=master)
 
 ## Overview
 
