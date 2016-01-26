@@ -24,6 +24,6 @@ in.red <- ansi_style("hello\\n", "red", use.style=TRUE)
 contains_ansi(in.red)
 cat(in.red)
 contains_ansi(strip_ansi(in.red))
-cat(strip_ansi(in.red)
+cat(strip_ansi(in.red))
 }
 

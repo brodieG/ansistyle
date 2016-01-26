@@ -43,7 +43,7 @@ ansi_regex <- paste0("(?:(?:\\x{001b}\\[)|\\x{009b})",
 #' contains_ansi(in.red)
 #' cat(in.red)
 #' contains_ansi(strip_ansi(in.red))
-#' cat(strip_ansi(in.red)
+#' cat(strip_ansi(in.red))
 
 strip_ansi <- function(string) {
   gsub(ansi_regex, "", string, perl = TRUE)
