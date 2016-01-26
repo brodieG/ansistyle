@@ -84,11 +84,11 @@ ansi_available <- function(force=getOption("ansistyle.enabled")) {
 
   res <- if(!is.null(force)) force else {
     if (!interactive()) {
-      ## Are we in interactive mode?
+      # Are we in interactive mode?
       FALSE
     } else if (.Platform$OS.type == "windows") {
-      ## Are we in a windows terminal?
-      FALSE
+      # Are we in a windows terminal that supports color?
+      Sys.getenv("ConEmuANSI") == "ON" || Sys.getenv("CMDER_ROOT") != ""
     } else if (
       inside_emacs() &&
       !any(is.na(e_v <- emacs_version())) && e_v[1] >= 23
