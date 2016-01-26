@@ -60,6 +60,10 @@ contains_ansi <- function(string) {
 
 #' Attempt to Detect Whether Terminal Supports ANSI Styles
 #'
+#' Loosely based on \code{crayon:::has_color}, but with some modifications.  In
+#' particular we test for interactive sessions instead of checking that
+#' \code{stdout} is a terminal to allow running with captured output.
+#'
 #' @export
 #' @param force TRUE, FALSE, or NULL; set to NULL to allow auto-detection
 #'   (default), or TRUE or FALSE to force this function to return TRUE or FALSE

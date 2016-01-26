@@ -14,6 +14,8 @@ ansi_available(force = getOption("ansistyle.enabled"))
 TRUE or FALSE
 }
 \description{
-Attempt to Detect Whether Terminal Supports ANSI Styles
+Loosely based on \code{crayon:::has_color}, but with some modifications.  In
+particular we test for interactive sessions instead of checking that
+\code{stdout} is a terminal to allow running with captured output.
 }
 
