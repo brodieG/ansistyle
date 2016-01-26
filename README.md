@@ -1,5 +1,8 @@
 # ansistyle - Stylish Terminal Output
 
+[![Build Status](https://travis-ci.org/brodieG/ansistyle.png?branch=master)](https://travis-ci.org/brodieG/ansistyle)
+[![Code Coverage](https://codecov.io/github/brodieG/unitizer/coverage.svg?branch=master)](https://codecov.io/github/brodieG/unitizer?branch=master)
+
 ## Overview
 
 Stripped down dependency-less version of the `[crayon][1]` package by Gábor Csárdi.  Modifies character vectors by adding ANSI escape sequences to render text with style in terminals that support ANSI style escape sequences.
