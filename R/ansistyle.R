@@ -206,3 +206,35 @@ emacs_version <- function() {
   ver <- strsplit(ver, ".", fixed = TRUE)[[1]]
   as.numeric(ver)
 }
+
+# - Other ----------------------------------------------------------------------
+
+#' Demonstrate ANSI Styles
+#'
+#' Displays each available style with the style applied.  Will apply ANSI escape
+#' sequences no matter what, so if your terminal does not support them you will
+#' see may see them displayed along with the text, instead of the styled text.
+#'
+#' @export
+#' @return NULL, invisibly
+#' @examples
+#' ansi_style_palette()
+
+ansi_style_palette <- function() {
+  if(!ansi_available())
+    message(
+      "ANSI escape sequences do not appear to be supported by your terminal."
+    )
+  styles <- valid_ansi_styles()
+  styled <- ansi_style(rep("Abcd", length(styles)), styles, use.style=TRUE)
+  len <- length(styled)
+  rows <- ceiling(len / 3)
+  len.tot <- rows * 3
+  out <- c(
+    paste0(format(paste0(styles, ":")), styled), character(len.tot - len)
+  )
+  sep <- "|"
+  for(i in seq_len(rows))
+    cat(out[i], sep, out[i + rows], sep, out[i + 2 * rows], "\n")
+  invisible(NULL)
+}
