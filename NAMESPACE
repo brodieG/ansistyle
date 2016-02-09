@@ -3,6 +3,7 @@
 export(.ansistyle_ansi_regex)
 export(ansi_available)
 export(ansi_style)
+export(ansi_style_nchar)
 export(ansi_style_palette)
 export(contains_ansi)
 export(strip_ansi)

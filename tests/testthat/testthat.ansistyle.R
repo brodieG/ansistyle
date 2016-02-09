@@ -47,4 +47,9 @@ test_that("emacs testing", {
   if(!is.na(emacs.2)) Sys.setenv(INSIDE_EMACS=emacs.2)
 
 } )
+test_that("nchar", {
+  txt <- c("hello", ansi_style("hello", "red"), ansi_style("hello", "inverse"))
+  expect_identical(ansi_style_nchar(txt), rep(5L, 3L))
+  expect_identical(ansi_style_nchar(txt, FALSE), c(5L, 15L, 14L))
+})
 options(old.opt)

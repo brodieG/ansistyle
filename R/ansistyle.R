@@ -191,9 +191,7 @@ valid_ansi_styles <- function() names(ansi.codes)
 ansi_style <- function(
   txt, style, use.style=getOption("ansistyle.use.style")
 ) {
-  if(!isTRUE(use.style) && !identical(use.style, FALSE) && !is.null(use.style))
-    stop("Argument `use.style` must be TRUE, FALSE, or NULL.")
-  if(is.null(use.style)) use.style <- ansi_available()
+  use.style <- valid_use_style(use.style)
   if(!isTRUE(use.style)) return(txt)
   if(!is.character(txt)) stop("Argument `txt` must be character")
   style.no.na <- Filter(Negate(is.na), style)
@@ -260,4 +258,36 @@ ansi_style_palette <- function() {
   for(i in seq_len(rows))
     cat(out[i], sep, out[i + rows], sep, out[i + 2 * rows], "\n")
   invisible(NULL)
+}
+#' Count Characters Accounting For ANSI Escape Sequences
+#'
+#' Behaves just like \code{\link{nchar}} when \code{use.style} is \code{FALSE},
+#' and ignores ANSI escape sequences in counts if it is \code{TRUE}
+#'
+#' @export
+#' @param txt character vector to count characters of
+#' @param use.style TRUE, FALSE, or NULL, whether we should interpret ANSI
+#'   escape sequences as escape sequences, or literally; NULL will auto-detect
+#'   ansi support with \code{\link{ansi_available}}
+#' @return integer same length as \code{txt}
+
+ansi_style_nchar <- function(txt, use.style=getOption("ansistyle.use.style")) {
+  use.style <- valid_use_style(use.style)
+  if(!isTRUE(use.style)) {
+    nchar(txt)
+  } else {
+    nchar(gsub(.ansistyle_ansi_regex, "", txt))
+  }
+}
+# Validation, will return error message with parent.call
+
+valid_use_style <- function(use.style) {
+  if(!isTRUE(use.style) && !identical(use.style, FALSE) && !is.null(use.style))
+    stop(
+      simpleError(
+        "Argument `use.style` must be TRUE, FALSE, or NULL.",
+        call=sys.call(-1L)
+    ) )
+  if(is.null(use.style)) use.style <- ansi_available()
+  use.style
 }

@@ -17,7 +17,7 @@ input, without ANSI escape sequences for \code{strip_ansi}, TRUE or
   FALSE for \code{contains_ansi}
 }
 \description{
-Uses the \code{ansistyle:::ansi_regex} pattern.
+Uses the \code{ansistyle:::ansistyle_ansi_regex} pattern.
 }
 \examples{
 in.red <- ansi_style("hello\\n", "red", use.style=TRUE)
