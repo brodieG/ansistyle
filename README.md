@@ -3,6 +3,10 @@
 [![Build Status](https://travis-ci.org/brodieG/ansistyle.png?branch=master)](https://travis-ci.org/brodieG/ansistyle)
 [![Code Coverage](https://codecov.io/github/brodieG/ansistyle/coverage.svg?branch=master)](https://codecov.io/github/brodieG/ansistyle?branch=master)
 
+**THIS PACKAGE IS NO LONGER UNDER DEVELOPMENT**
+
+Ended up needing too much of the functionality built-into `crayon`, so instead figured out that removing depenencies form `crayon` was not too difficult.
+
 ## Overview
 
 Stripped down dependency-less version of the [`crayon`][1] package by Gábor Csárdi.  Modifies character vectors by adding ANSI escape sequences to render text with style in terminals that support ANSI style escape sequences.

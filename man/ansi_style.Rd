@@ -4,7 +4,7 @@
 \alias{ansi_style}
 \title{Add ANSI Style Escape Sequences Codes Around Elements of a Character Vector}
 \usage{
-ansi_style(txt, style, use.style = ansi_available())
+ansi_style(txt, style, use.style = getOption("ansistyle.use.style"))
 }
 \arguments{
 \item{txt}{character vector to style; every element of the vector will have
@@ -13,8 +13,9 @@ escape sequences added at the beginning and end of the string}
 \item{style}{character, either length 1L or same length as \code{txt}, what
 style to use, see \code{\link{valid_ansi_styles}}}
 
-\item{use.style}{logical(1L) whether to use style or not; provides a
-mechanism for turning off styling for systems that do not support it}
+\item{use.style}{logical(1L) whether to use style or not. Provides a
+mechanism for turning off styling for systems that do not support it; if
+set to NULL will auto detect with \code{\link{ansi_available()}}}
 }
 \value{
 character vector, \code{txt} with ansi escape sequences added

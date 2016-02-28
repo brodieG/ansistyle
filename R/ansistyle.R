@@ -23,15 +23,17 @@ NULL
 # - R/has_ansi.r ---------------------------------------------------------------
 # https://github.com/gaborcsardi/crayon/commit/5de3d97fe6d4d0627cdfa2b8b2f4d402dc404c63
 
-# ansi style code regex pattern
+#' Regex Pattern To Match ANSI Escape Sequences
+#'
+#' @export
 
-ansi_regex <- paste0("(?:(?:\\x{001b}\\[)|\\x{009b})",
+.ansistyle_ansi_regex <- paste0("(?:(?:\\x{001b}\\[)|\\x{009b})",
   "(?:(?:[0-9]{1,3})?(?:(?:;[0-9]{0,3})*)?[A-M|f-m])",
   "|\\x{001b}[A-M]")
 
 #' Check For or Remove ANSI Escape Sequences From a String
 #'
-#' Uses the \code{ansistyle:::ansi_regex} pattern.
+#' Uses the \code{ansistyle:::ansistyle_ansi_regex} pattern.
 #'
 #' @export
 #' @param string character vector
@@ -46,13 +48,13 @@ ansi_regex <- paste0("(?:(?:\\x{001b}\\[)|\\x{009b})",
 #' cat(strip_ansi(in.red))
 
 strip_ansi <- function(string) {
-  gsub(ansi_regex, "", string, perl = TRUE)
+  gsub(.ansistyle_ansi_regex, "", string, perl = TRUE)
 }
 #' @export
 #' @rdname strip_ansi
 
 contains_ansi <- function(string) {
-  grepl(ansi_regex, string, perl = TRUE)
+  grepl(.ansistyle_ansi_regex, string, perl = TRUE)
 }
 
 # - R/has_color.R --------------------------------------------------------------
@@ -175,8 +177,9 @@ valid_ansi_styles <- function() names(ansi.codes)
 #'   escape sequences added at the beginning and end of the string
 #' @param style character, either length 1L or same length as \code{txt}, what
 #'   style to use, see \code{\link{valid_ansi_styles}}
-#' @param use.style logical(1L) whether to use style or not; provides a
-#'   mechanism for turning off styling for systems that do not support it
+#' @param use.style logical(1L) whether to use style or not. Provides a
+#'   mechanism for turning off styling for systems that do not support it; if
+#'   set to NULL will auto detect with \code{\link{ansi_available()}}
 #' @return character vector, \code{txt} with ansi escape sequences added
 #' @seealso \code{\link{valid_ansi_styles}}, \code{\link{ansi_style_palette}}
 #' @examples
@@ -186,10 +189,9 @@ valid_ansi_styles <- function() names(ansi.codes)
 #' cat(ansi_style(c("baz", ansi_style("foo", "bgGreen"), "bar"), "blue"), "\n")
 
 ansi_style <- function(
-  txt, style, use.style=ansi_available()
+  txt, style, use.style=getOption("ansistyle.use.style")
 ) {
-  if(!isTRUE(use.style) && !identical(use.style, FALSE))
-    stop("Argument `use.style` must be TRUE or FALSE.")
+  use.style <- valid_use_style(use.style)
   if(!isTRUE(use.style)) return(txt)
   if(!is.character(txt)) stop("Argument `txt` must be character")
   style.no.na <- Filter(Negate(is.na), style)
@@ -256,4 +258,36 @@ ansi_style_palette <- function() {
   for(i in seq_len(rows))
     cat(out[i], sep, out[i + rows], sep, out[i + 2 * rows], "\n")
   invisible(NULL)
+}
+#' Count Characters Accounting For ANSI Escape Sequences
+#'
+#' Behaves just like \code{\link{nchar}} when \code{use.style} is \code{FALSE},
+#' and ignores ANSI escape sequences in counts if it is \code{TRUE}
+#'
+#' @export
+#' @param txt character vector to count characters of
+#' @param use.style TRUE, FALSE, or NULL, whether we should interpret ANSI
+#'   escape sequences as escape sequences, or literally; NULL will auto-detect
+#'   ansi support with \code{\link{ansi_available}}
+#' @return integer same length as \code{txt}
+
+ansi_style_nchar <- function(txt, use.style=getOption("ansistyle.use.style")) {
+  use.style <- valid_use_style(use.style)
+  if(!isTRUE(use.style)) {
+    nchar(txt)
+  } else {
+    nchar(gsub(.ansistyle_ansi_regex, "", txt))
+  }
+}
+# Validation, will return error message with parent.call
+
+valid_use_style <- function(use.style) {
+  if(!isTRUE(use.style) && !identical(use.style, FALSE) && !is.null(use.style))
+    stop(
+      simpleError(
+        "Argument `use.style` must be TRUE, FALSE, or NULL.",
+        call=sys.call(-1L)
+    ) )
+  if(is.null(use.style)) use.style <- ansi_available()
+  use.style
 }
